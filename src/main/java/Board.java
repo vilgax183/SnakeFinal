@@ -59,29 +59,4 @@ public class Board {
         return map;
     }
 
-    private static int findRow(int square) {
-        return (square - 1) / 10;
-    }
-
-    private int findLowerRowInt(int square) {
-        int tail;
-        while (true) {
-            tail = (int) Math.ceil(Math.random() * 100);
-            if (findRow(tail) < findRow(square) && !endPoints.contains(tail)) {
-                endPoints.add(tail);
-                return tail;
-            }
-        }
-    }
-
-    private int findHigherRowInt(int square) {
-        int top;
-        while (true) {
-            top = (int) Math.ceil(Math.random() * 100);
-            if (findRow(top) > findRow(square) && !endPoints.contains(top)) {
-                endPoints.add(top);
-                return top;
-            }
-        }
-    }
 }

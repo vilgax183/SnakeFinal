@@ -5,26 +5,29 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.util.Pair;
 
+import static java.lang.Thread.sleep;
+
 public class Display extends javafx.scene.canvas.Canvas  {
 
     private GraphicsContext gc;
     private Game game;
 
-    public Display(Game game) {
+    public Display(Game game) throws InterruptedException {
         super();
         super.setWidth(600);
-        super.setHeight(800);
+        super.setHeight(1000);
         gc = super.getGraphicsContext2D();
         gc.setFont(Font.font("Verdana", 20));
         this.game = game;
         update();
     }
 
-    public void update() {
+    public void update() throws InterruptedException {
         gc.clearRect(0, 0, super.getWidth(), super.getHeight());
+
+        sleep(100);
         drawSquares();
-        drawNumbers();
-        drawSnakesAndLadders();
+        drawNumbers();drawSnakesAndLadders();
         drawPlayers();
     }
 
@@ -78,15 +81,19 @@ public class Display extends javafx.scene.canvas.Canvas  {
 
     }
 
-    private void drawPlayers() {
+    private void drawPlayers() throws InterruptedException {
         for (int i = 0; i < game.getPlayers().length; i++) {
             int square = game.getPosition(i);
             int xCoordinate = getCoordinates(square).getKey();
             int yCoordinate = getCoordinates(square).getValue();
+            System.out.println(square);
             xCoordinate = xCoordinate - 26 + ((i % 4) * 14);
             yCoordinate = yCoordinate -26 - ((i / 4) * 14);
+            System.out.println(xCoordinate);
+            System.out.println(yCoordinate);
             Image img=game.getPlayers()[i].getColor();
             gc.drawImage(img,xCoordinate, yCoordinate);
+
         }
 
     }
